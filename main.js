@@ -70,7 +70,34 @@
   }
 
   initMapCanvas(prefersReduced);
+  initYouTubeEmbeds();
 })();
+
+function initYouTubeEmbeds() {
+  const origin = window.location.origin.includes("github.io")
+    ? window.location.origin
+    : "https://qayyumu.github.io";
+
+  document.querySelectorAll(".video-embed[data-youtube-id]").forEach((wrap) => {
+    const button = wrap.querySelector(".video-play");
+    if (!button) return;
+
+    button.addEventListener("click", () => {
+      const id = wrap.getAttribute("data-youtube-id");
+      if (!id) return;
+
+      const title = button.getAttribute("aria-label") || "YouTube video";
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&origin=${encodeURIComponent(origin)}`;
+      iframe.title = title.replace(/^Play\s+/i, "");
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.setAttribute("allowfullscreen", "");
+      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      wrap.replaceChildren(iframe);
+    });
+  });
+}
 
 function initMapCanvas(reducedMotion) {
   const canvas = document.getElementById("map-canvas");
