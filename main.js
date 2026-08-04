@@ -113,8 +113,9 @@ function initMapCanvas(reducedMotion) {
 
     // Soft horizon wash
     const wash = ctx.createLinearGradient(0, 0, 0, height * 0.7);
-    wash.addColorStop(0, "rgba(180, 205, 218, 0.35)");
-    wash.addColorStop(1, "rgba(180, 205, 218, 0)");
+    wash.addColorStop(0, "rgba(150, 205, 235, 0.42)");
+    wash.addColorStop(0.55, "rgba(183, 214, 236, 0.18)");
+    wash.addColorStop(1, "rgba(183, 214, 236, 0)");
     ctx.fillStyle = wash;
     ctx.fillRect(0, 0, width, height * 0.7);
 
@@ -135,8 +136,8 @@ function initMapCanvas(reducedMotion) {
         const dy = a.y - b.y;
         const dist = Math.hypot(dx, dy);
         if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * 0.28;
-          ctx.strokeStyle = `rgba(11, 110, 106, ${alpha})`;
+          const alpha = (1 - dist / maxDist) * 0.38;
+          ctx.strokeStyle = `rgba(26, 115, 184, ${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -145,7 +146,7 @@ function initMapCanvas(reducedMotion) {
         }
       }
 
-      ctx.fillStyle = "rgba(21, 32, 43, 0.45)";
+      ctx.fillStyle = "rgba(18, 90, 150, 0.55)";
       ctx.beginPath();
       ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
       ctx.fill();
@@ -157,7 +158,7 @@ function initMapCanvas(reducedMotion) {
       const cx = width * (0.55 + Math.sin(t * 0.7) * 0.08);
       const cy = height * (0.28 + Math.cos(t * 0.5) * 0.05);
       const radius = Math.min(width, height) * 0.22;
-      ctx.strokeStyle = "rgba(11, 110, 106, 0.16)";
+      ctx.strokeStyle = "rgba(110, 182, 224, 0.35)";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.arc(cx, cy, radius, t, t + Math.PI * 1.2);
